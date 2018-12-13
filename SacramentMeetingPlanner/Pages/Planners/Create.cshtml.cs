@@ -82,10 +82,10 @@ namespace SacramentMeetingPlanner.Pages.Planners
 				_context.Planner.Add(emptyPlanner);
 				await _context.SaveChangesAsync();
 				
-				return RedirectToPage("/Songs/Create");
+				return RedirectToPage("/Songs/Create", new { id = emptyPlanner.PlannerId });
 			}
 			
-			return RedirectToPage("/Songs/Create");
+			return RedirectToPage("./Index");
 		}
 	}
 }

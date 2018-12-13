@@ -18,8 +18,10 @@ namespace SacramentMeetingPlanner.Pages.Songs
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
+		//[HttpGet("")]
+		public IActionResult OnGet()
+		{
+			
             return Page();
         }
 
@@ -28,15 +30,25 @@ namespace SacramentMeetingPlanner.Pages.Songs
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+			if (!ModelState.IsValid)
+			{
+				return Page();
+			}
+			
+			var emptySongs = new Song();
 
-            _context.Songs.Add(Song);
-            await _context.SaveChangesAsync();
+			if (await TryUpdateModelAsync<Song>(
+				emptySongs,
+				"song",   // Prefix for form value.
+				s => s.OpenSongNum, s => s.OpenSongTitle, s => s.CloseSongNum, s => s.CloseSongTitle, s => s.InterSongNum, s => s.InterSongTitle, s => s.SacramentSongNum, s => s.SacramentSongTitle, s => s.PlannerId))
+			{
+				_context.Songs.Add(emptySongs);
+				await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
-        }
+				return RedirectToPage("/Planners/Edit", new { id = emptySongs.PlannerId });
+			}
+
+			return RedirectToPage("/Planners/Edit");
+		}
     }
 }
