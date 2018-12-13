@@ -1,0 +1,78 @@
+﻿@page
+@model SacramentMeetingPlanner.Pages.Songs.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Song[0].OpenSongNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Song[0].OpenSongTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Song[0].SacramentSongNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Song[0].SacramentSongTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Song[0].InterSongNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Song[0].InterSongTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Song[0].CloseSongNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Song[0].CloseSongTitle)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Song) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenSongNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenSongTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SacramentSongNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SacramentSongTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InterSongNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InterSongTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CloseSongNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CloseSongTitle)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.SongId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.SongId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.SongId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,124 @@
+﻿@page
+@model SacramentMeetingPlanner.Pages.Planners.DetailsModel
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Planner</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Planner.MeetingDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Planner.MeetingDate)
+        </dd>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Planner.Bishopric)*@
+			Conducting
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Bishopric.BishopricName)
+        </dd>
+		<dt>
+			@*@Html.DisplayFor(model => model.Planner.Songs)*@
+			Hymns
+		</dt>
+		<dd>
+			<table class="table">
+				<tr>
+					<th></th>
+					<th>Number</th>
+					<th>Title</th>
+				</tr>
+				@foreach (var item in Model.Planner.Songs)
+				{
+					<tr>
+						<td>Opening Hymn:</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.OpenSongNum)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.OpenSongTitle)
+						</td>
+					</tr>
+					<tr>
+						<td>Sacrament Hymn:</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.SacramentSongNum)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.SacramentSongTitle)
+						</td>
+					</tr>
+					@if (item.InterSongNum != null)
+					{
+						<tr>
+							<td>Intermediate Hymn:</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.InterSongNum)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.InterSongTitle)
+							</td>
+						</tr>
+					}
+					<tr>
+						<td>Closing Hymn:</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.CloseSongNum)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.CloseSongTitle)
+						</td>
+					</tr>
+				}
+			</table>
+		</dd>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Planner.OpenPrayer)*@
+			Opening Prayer
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Planner.OpenPrayer)
+        </dd>
+		<dt>
+			@*@Html.DisplayFor(model => model.Planner.Speakers)*@
+			Speakers
+		</dt>
+		<dd>
+			<table class="table">
+				<tr>
+					<th>Speaker Name</th>
+					<th>Topic</th>
+				</tr>
+				@foreach (var item in Model.Planner.Speakers)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.SpeakerName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.SpeakerTopic)
+						</td>
+					</tr>
+				}
+			</table>
+		</dd>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Planner.ClosePrayer)*@
+			Closing Prayer
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Planner.ClosePrayer)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Planner.PlannerId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -1,0 +1,56 @@
+﻿@page
+@model SacramentMeetingPlanner.Pages.Planners.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Planner</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+		<form method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Planner.MeetingDate" class="control-label"></label>
+				<input asp-for="Planner.MeetingDate" class="form-control" />
+				<span asp-validation-for="Planner.MeetingDate" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Planner.Bishopric" class="control-label"></label>
+				<input asp-for="Planner.Bishopric" class="form-control" />
+				<span asp-validation-for="Planner.Bishopric" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Planner.OpenPrayer" class="control-label"></label>
+				<input asp-for="Planner.OpenPrayer" class="form-control" />
+				<span asp-validation-for="Planner.OpenPrayer" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Planner.ClosePrayer" class="control-label"></label>
+				<input asp-for="Planner.ClosePrayer" class="form-control" />
+				<span asp-validation-for="Planner.ClosePrayer" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				@*<input type="submit" value="Create" class="btn btn-default" />*@
+				@*<input type="submit" value="Add Songs" name="addSongs" />*@
+				@*<a asp-action="AddSongs">Add Songs</a>*@
+				@*@Html.ActionLink("Add Songs", "AddSongs")*@
+				<input type="submit" asp-page-handler="AddSongs" value="Add Songs"/>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Create" class="btn btn-default" />
+			</div>
+		</form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
