@@ -40,8 +40,8 @@ namespace SacramentMeetingPlanner.Data
 			//new Student{FirstMidName="Peggy",LastName="Justice",EnrollmentDate=DateTime.Parse("2001-09-01")},
 			//new Student{FirstMidName="Laura",LastName="Norman",EnrollmentDate=DateTime.Parse("2003-09-01")},
 			//new Student{FirstMidName="Nino",LastName="Olivetto",EnrollmentDate=DateTime.Parse("2005-09-01")}
-			new Planner{MeetingDate=DateTime.Parse("2018-12-09"),Bishopric=1,OpenPrayer="Kayla Roberts",ClosePrayer="Cory Hellbusch"},
-			new Planner{MeetingDate=DateTime.Parse("2018-12-16"),Bishopric=2,OpenPrayer="Dana Roberts",ClosePrayer="Jordan Fielding"}
+			new Planner{MeetingDate=DateTime.Parse("2018-12-09"),BishopricId=1,OpenPrayer="Kayla Roberts",ClosePrayer="Cory Hellbusch"},
+			new Planner{MeetingDate=DateTime.Parse("2018-12-16"),BishopricId=2,OpenPrayer="Dana Roberts",ClosePrayer="Jordan Fielding"}
 			};
 			foreach (Planner p in planners)
 			{

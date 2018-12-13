@@ -42,7 +42,7 @@ namespace SacramentMeetingPlanner.Pages.Planners
 						.AsNoTracking()
 						.FirstOrDefaultAsync(m => m.PlannerId == id);
 
-			Bishopric = await _context.Bishopric.FirstOrDefaultAsync(m => m.BishopricId == Planner.Bishopric);
+			Bishopric = await _context.Bishopric.FirstOrDefaultAsync(m => m.BishopricId == Planner.BishopricId);
 
 			if (Planner == null)
             {

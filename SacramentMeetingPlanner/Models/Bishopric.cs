@@ -10,5 +10,7 @@ namespace SacramentMeetingPlanner.Models
 		public int BishopricId { get; set; }
 		public Boolean Active { get; set; }
 		public string BishopricName { get; set; }
+
+		public ICollection<Planner> Planners { get; set; }
 	}
 }

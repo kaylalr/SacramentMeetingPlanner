@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SacramentMeetingPlanner.Models;
 
 namespace SacramentMeetingPlanner.Migrations
 {
     [DbContext(typeof(MeetingContext))]
-    partial class MeetingContextModelSnapshot : ModelSnapshot
+    [Migration("20181213154658_BishopricForeignKeyUpdate")]
+    partial class BishopricForeignKeyUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,7 +109,7 @@ namespace SacramentMeetingPlanner.Migrations
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Planner", b =>
                 {
-                    b.HasOne("SacramentMeetingPlanner.Models.Bishopric", "Bishopric")
+                    b.HasOne("SacramentMeetingPlanner.Models.Bishopric")
                         .WithMany("Planners")
                         .HasForeignKey("BishopricId")
                         .OnDelete(DeleteBehavior.Cascade);

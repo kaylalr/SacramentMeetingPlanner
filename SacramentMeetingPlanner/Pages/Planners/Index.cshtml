@@ -18,7 +18,7 @@
 				@Html.DisplayNameFor(model => model.Planner[0].MeetingDate)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.Planner[0].Bishopric)
+				@Html.DisplayNameFor(model => model.Planner[0].BishopricId)
 				@*Conducting*@
 			</th>
 			<th>
@@ -41,7 +41,7 @@
 					@Html.DisplayFor(modelItem => item.MeetingDate)
 				</td>
 				<td>
-					@Html.DisplayFor(modelItem => item.Bishopric)
+					@Html.DisplayFor(modelItem => item.Bishopric.BishopricName)
 					@*@Html.DisplayFor(modelItem => item.Bishopric.BishopricName)*@
 					@*@foreach (var conducting in Model.Planner)
 			{
@@ -55,9 +55,11 @@
 					@Html.DisplayFor(modelItem => item.ClosePrayer)
 				</td>
 				<td>
-					<a asp-page="./Edit" asp-route-id="@item.PlannerId">Edit</a> |
+					@*@foreach (var sitem in Model.Planner.Songs) {*@ 
+					<a asp-page="./Edit" asp-route-id="@item.PlannerId" @*asp-route-songid="@sitem.Songs.SongId"*@>Edit</a> |
 					<a asp-page="./Details" asp-route-id="@item.PlannerId">Details</a> |
 					<a asp-page="./Delete" asp-route-id="@item.PlannerId">Delete</a>
+					
 				</td>
 			</tr>
 		}

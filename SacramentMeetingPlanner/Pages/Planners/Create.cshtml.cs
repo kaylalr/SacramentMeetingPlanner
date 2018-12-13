@@ -44,7 +44,7 @@ namespace SacramentMeetingPlanner.Pages.Planners
 			if (await TryUpdateModelAsync<Planner>(
 				emptyPlanner,
 				"planner",   // Prefix for form value.
-				p => p.MeetingDate, p => p.Bishopric, p => p.OpenPrayer, p => p.ClosePrayer))
+				p => p.MeetingDate, p => p.BishopricId, p => p.OpenPrayer, p => p.ClosePrayer))
 			{
 				_context.Planner.Add(emptyPlanner);
 				await _context.SaveChangesAsync();
@@ -77,7 +77,7 @@ namespace SacramentMeetingPlanner.Pages.Planners
 			if (await TryUpdateModelAsync<Planner>(
 				emptyPlanner,
 				"planner",   // Prefix for form value.
-				p => p.MeetingDate, p => p.Bishopric, p => p.OpenPrayer, p => p.ClosePrayer))
+				p => p.MeetingDate, p => p.BishopricId, p => p.OpenPrayer, p => p.ClosePrayer))
 			{
 				_context.Planner.Add(emptyPlanner);
 				await _context.SaveChangesAsync();

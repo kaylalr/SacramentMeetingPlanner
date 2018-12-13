@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SacramentMeetingPlanner.Models;
 
 namespace SacramentMeetingPlanner.Migrations
 {
     [DbContext(typeof(MeetingContext))]
-    partial class MeetingContextModelSnapshot : ModelSnapshot
+    [Migration("20181213153725_BishopricForeignKey")]
+    partial class BishopricForeignKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +31,11 @@ namespace SacramentMeetingPlanner.Migrations
 
                     b.Property<string>("BishopricName");
 
+                    b.Property<int?>("PlannerId");
+
                     b.HasKey("BishopricId");
+
+                    b.HasIndex("PlannerId");
 
                     b.ToTable("Bishopric");
                 });
@@ -49,8 +55,6 @@ namespace SacramentMeetingPlanner.Migrations
                     b.Property<string>("OpenPrayer");
 
                     b.HasKey("PlannerId");
-
-                    b.HasIndex("BishopricId");
 
                     b.ToTable("Planner");
                 });
@@ -105,12 +109,11 @@ namespace SacramentMeetingPlanner.Migrations
                     b.ToTable("Speakers");
                 });
 
-            modelBuilder.Entity("SacramentMeetingPlanner.Models.Planner", b =>
+            modelBuilder.Entity("SacramentMeetingPlanner.Models.Bishopric", b =>
                 {
-                    b.HasOne("SacramentMeetingPlanner.Models.Bishopric", "Bishopric")
-                        .WithMany("Planners")
-                        .HasForeignKey("BishopricId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("SacramentMeetingPlanner.Models.Planner")
+                        .WithMany("Bishoprics")
+                        .HasForeignKey("PlannerId");
                 });
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Song", b =>

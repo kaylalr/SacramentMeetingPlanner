@@ -19,12 +19,13 @@ namespace SacramentMeetingPlanner.Pages.Planners
         }
 
         public IList<Planner> Planner { get;set; }
+		//public Song Songs { get; set; }
 		//public Planner Planners { get; set; }
 		//public Bishopric Bishopric { get; set; }
 
 		public async Task OnGetAsync()
         {
-            Planner = await _context.Planner.ToListAsync();
+            Planner = await _context.Planner.Include(b => b.Bishopric).Include(s => s.Songs).ToListAsync();
 			//foreach (var conducting in Planner)
 			//{
 			//	Bishopric = await _context.Bishopric.FirstOrDefaultAsync(m => m.BishopricId == conducting.Bishopric);

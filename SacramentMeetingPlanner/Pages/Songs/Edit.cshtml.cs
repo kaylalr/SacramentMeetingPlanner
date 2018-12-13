@@ -45,22 +45,38 @@ namespace SacramentMeetingPlanner.Pages.Songs
 				return Page();
 			}
 
+			//var plannerToUpdate = await _context.Planner.FindAsync(id);
+
+			//if (await TryUpdateModelAsync<Planner>(
+			//	plannerToUpdate,
+			//	"planner",
+			//	p => p.MeetingDate, p => p.BishopricId, p => p.OpenPrayer, p => p.ClosePrayer))
+			//{
+			//	await _context.SaveChangesAsync();
+
 			var songsToUpdate = await _context.Songs.FindAsync(id);
 
 			if (await TryUpdateModelAsync<Song>(
 				songsToUpdate,
-				"songs",
-				s => s.OpenSongNum, s => s.OpenSongTitle, s => s.CloseSongNum, s => s.CloseSongTitle, s => s.InterSongNum, s => s.InterSongTitle, s => s.SacramentSongNum, s => s.SacramentSongTitle, s => s.PlannerId))
+				"song",
+				s => s.OpenSongNum, s => s.OpenSongTitle, s => s.SacramentSongNum, s => s.SacramentSongTitle, s => s.InterSongNum, s => s.InterSongTitle, s => s.CloseSongNum, s => s.CloseSongTitle))
 			{
 				await _context.SaveChangesAsync();
 				//pass in id here??? I think I don't have to because in planners edit.cshtml.cs I do a request.query for the id if it's null when the method is called
-				return RedirectToPage("/Planner/Edit", new { id = songsToUpdate.PlannerId });
+				return RedirectToPage("/Planners/Edit", new { id = songsToUpdate.PlannerId });
 			}
 
 			return Page();
 		}
 
-        private bool SongExists(int id)
+		public async Task<IActionResult> OnPostCancelAsync(int? id)
+		{
+			var song = await _context.Songs.FindAsync(id);
+			return RedirectToPage("/Planners/Edit", new { id = song.PlannerId });
+		}
+
+
+		private bool SongExists(int id)
         {
             return _context.Songs.Any(e => e.SongId == id);
         }

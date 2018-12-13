@@ -10,10 +10,13 @@ namespace SacramentMeetingPlanner.Models
 		//public int SpeakerId { get; set; }
 		public int PlannerId { get; set; }
 		public DateTime MeetingDate { get; set; }
-		public int Bishopric { get; set; }
+		public int BishopricId { get; set; }
 		public string OpenPrayer { get; set; }
 		public string ClosePrayer { get; set; }
+
+		public Bishopric Bishopric { get; set; }
 		public ICollection<Speaker> Speakers { get; set; }
 		public ICollection<Song> Songs { get; set; }
+		//public ICollection<Bishopric> Bishoprics { get; set; } 
 	}
 }
