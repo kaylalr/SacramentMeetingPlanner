@@ -11,38 +11,54 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" name="id" asp-for="Planner.PlannerId" />
-            <div class="form-group">
-                <label asp-for="Planner.MeetingDate" class="control-label"></label>
-                <input asp-for="Planner.MeetingDate" class="form-control" />
-                <span asp-validation-for="Planner.MeetingDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Planner.BishopricId" class="control-label"></label>
-                <input asp-for="Planner.BishopricId" class="form-control" />
-                <span asp-validation-for="Planner.BishopricId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Planner.OpenPrayer" class="control-label"></label>
-                <input asp-for="Planner.OpenPrayer" class="form-control" />
-                <span asp-validation-for="Planner.OpenPrayer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Planner.ClosePrayer" class="control-label"></label>
-                <input asp-for="Planner.ClosePrayer" class="form-control" />
-                <span asp-validation-for="Planner.ClosePrayer" class="text-danger"></span>
-            </div>
+		<form method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" name="id" asp-for="Planner.PlannerId" />
+			<div class="form-group">
+				<label asp-for="Planner.MeetingDate" class="control-label"></label>
+				<input asp-for="Planner.MeetingDate" class="form-control" />
+				<span asp-validation-for="Planner.MeetingDate" class="text-danger"></span>
+			</div>
+			@*<div class="form-group">
+			<label asp-for="Planner.BishopricId" class="control-label"></label>
+			<input asp-for="Planner.BishopricId" class="form-control" />
+			<span asp-validation-for="Planner.BishopricId" class="text-danger"></span>
+		</div>*@
+			<div>
+				<label asp-for="Planner.BishopricId" class="control-label">Conducting:</label>
+				<select asp-for="Planner.BishopricId">
+					@foreach (var bMember in @Model.Bishopric)
+					{
+						@if (bMember.BishopricId == Model.Planner.BishopricId)
+						{
+							<option selected value="@bMember.BishopricId">@bMember.BishopricName</option>
+						}
+						else
+						{
+						<option value="@bMember.BishopricId">@bMember.BishopricName</option>
+						}
+					}
+				</select>
+			</div>
+			<div class="form-group">
+				<label asp-for="Planner.OpenPrayer" class="control-label"></label>
+				<input asp-for="Planner.OpenPrayer" class="form-control" />
+				<span asp-validation-for="Planner.OpenPrayer" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Planner.ClosePrayer" class="control-label"></label>
+				<input asp-for="Planner.ClosePrayer" class="form-control" />
+				<span asp-validation-for="Planner.ClosePrayer" class="text-danger"></span>
+			</div>
 			<div class="form-group">
 				@*change these to say edit if there are already songs added???*@
 				<input type="submit" asp-page-handler="UpdateSongs" value="Add Songs" />
-				<input type="submit" asp-page-handler="UpdateSpeakers" value="Add Speakers"/>
+				<input type="submit" asp-page-handler="UpdateSpeakers" value="Add Speakers" />
 			</div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+			<div class="form-group">
+				<input type="submit" value="Save" class="btn btn-default" />
+			</div>
+		</form>
     </div>
 </div>
 

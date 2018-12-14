@@ -23,9 +23,13 @@ namespace SacramentMeetingPlanner.Pages.Planners
 		public Planner Planner { get; set; }
 		public ICollection<Song> Songs { get; set; }
 		public IList<Song> Song { get; set; }
+		public ICollection<Bishopric> Bishopric { get; set; }
+
 
 		public async Task<IActionResult> OnGetAsync(int? id)
 		{
+			Bishopric = _context.Bishopric.Where(b => b.Active == true).ToList();
+
 			if (id == null)
 			{
 				id = int.Parse(Request.Query["id"]);

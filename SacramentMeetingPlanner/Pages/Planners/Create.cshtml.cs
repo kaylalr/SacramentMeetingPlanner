@@ -19,13 +19,15 @@ namespace SacramentMeetingPlanner.Pages.Planners
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
+		[BindProperty]
+		public Planner Planner { get; set; }
+		public ICollection<Bishopric> Bishopric { get; set; }
 
-        [BindProperty]
-        public Planner Planner { get; set; }
+		public IActionResult OnGet()
+        {
+			Bishopric = _context.Bishopric.Where(b => b.Active == true).ToList();
+			return Page();
+        }
 
 		//[HttpGet("/Create?action")]
 		//public string Action { get; set; }
