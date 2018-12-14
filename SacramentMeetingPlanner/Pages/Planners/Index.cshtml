@@ -13,7 +13,6 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>PlannerId</th>
 			<th>
 				@Html.DisplayNameFor(model => model.Planner[0].MeetingDate)
 			</th>
@@ -34,9 +33,6 @@
 		@foreach (var item in Model.Planner)
 		{
 			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.PlannerId)
-				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.MeetingDate)
 				</td>
