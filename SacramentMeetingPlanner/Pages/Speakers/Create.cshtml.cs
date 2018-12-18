@@ -18,8 +18,11 @@ namespace SacramentMeetingPlanner.Pages.Speakers
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public int PlannerId { get; set; }
+
+        public IActionResult OnGet(int PlannerId)
         {
+            PlannerId = PlannerId;
             return Page();
         }
 

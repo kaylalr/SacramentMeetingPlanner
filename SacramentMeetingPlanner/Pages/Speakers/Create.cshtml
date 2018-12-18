@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    var plannerId = Request.Query["id"];
 }
 
 <h2>Create</h2>
@@ -13,10 +14,10 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Speaker.PlannerId" class="control-label"></label>
-                <select asp-for="Speaker.PlannerId" class ="form-control" asp-items="ViewBag.PlannerId"></select>
-            </div>
+                <select asp-for="Speaker.PlannerId" class="form-control" asp-items="ViewBag.PlannerId"></select>
+            </div> *@
             <div class="form-group">
                 <label asp-for="Speaker.SpeakerName" class="control-label"></label>
                 <input asp-for="Speaker.SpeakerName" class="form-control" />
@@ -26,6 +27,9 @@
                 <label asp-for="Speaker.SpeakerTopic" class="control-label"></label>
                 <input asp-for="Speaker.SpeakerTopic" class="form-control" />
                 <span asp-validation-for="Speaker.SpeakerTopic" class="text-danger"></span>
+            </div>
+            <div>
+                <input type="hidden" asp-for="Speaker.PlannerId" value="@plannerId" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

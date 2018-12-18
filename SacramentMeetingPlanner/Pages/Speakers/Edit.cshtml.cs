@@ -21,12 +21,18 @@ namespace SacramentMeetingPlanner.Pages.Speakers
 
         [BindProperty]
         public Speaker Speaker { get; set; }
+        public int PlannerId { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, int? PlannerId)
         {
             if (id == null)
             {
                 return NotFound();
+            }
+
+            if (PlannerId != null)
+            {
+                PlannerId = PlannerId.Value;
             }
 
             Speaker = await _context.Speakers.FirstOrDefaultAsync(m => m.SpeakerId == id);
