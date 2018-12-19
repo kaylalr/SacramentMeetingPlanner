@@ -64,8 +64,34 @@ namespace SacramentMeetingPlanner.Pages.Planners
 			return RedirectToPage("./Index");
         }
 
-		//[HttpGet("/Create?action=")]
-		public async Task<IActionResult> OnPostAddSongsAsync()
+        //[HttpGet("/Create?action=")]
+        public async Task<IActionResult> OnPostAddSpeakersAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            //_context.Planner.Add(Planner);
+            //await _context.SaveChangesAsync();
+            var emptyPlanner = new Planner();
+
+            if (await TryUpdateModelAsync<Planner>(
+                emptyPlanner,
+                "planner",   // Prefix for form value.
+                p => p.MeetingDate, p => p.BishopricId, p => p.OpenPrayer, p => p.ClosePrayer))
+            {
+                _context.Planner.Add(emptyPlanner);
+                await _context.SaveChangesAsync();
+
+                return RedirectToPage("/Speakers/Create", new { id = emptyPlanner.PlannerId });
+            }
+
+            return RedirectToPage("./Index");
+        }
+
+        //[HttpGet("/Create?action=")]
+        public async Task<IActionResult> OnPostAddSongsAsync()
 		{
 			if (!ModelState.IsValid)
 			{

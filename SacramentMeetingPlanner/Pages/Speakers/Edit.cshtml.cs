@@ -44,32 +44,26 @@ namespace SacramentMeetingPlanner.Pages.Speakers
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Speaker).State = EntityState.Modified;
+            var speakersToUpdate = await _context.Speakers.FindAsync(id);
 
-            try
+            if (await TryUpdateModelAsync<Speaker>(
+                speakersToUpdate,
+                "speaker",
+                s => s.SpeakerName, s => s.SpeakerTopic))
             {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SpeakerExists(Speaker.SpeakerId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                //pass in id here??? I think I don't have to because in planners edit.cshtml.cs I do a request.query for the id if it's null when the method is called
+                return RedirectToPage("/Planners/Edit", new { id = speakersToUpdate.PlannerId });
             }
 
-            return RedirectToPage("./Index");
+            return Page();
         }
 
         private bool SpeakerExists(int id)

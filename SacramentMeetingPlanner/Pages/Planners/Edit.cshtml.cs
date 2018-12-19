@@ -21,7 +21,9 @@ namespace SacramentMeetingPlanner.Pages.Planners
 
 		[BindProperty]
 		public Planner Planner { get; set; }
-		public ICollection<Song> Songs { get; set; }
+        public ICollection<Speaker> Speakers { get; set; }
+        public IList<Speaker> Speaker { get; set; }
+        public ICollection<Song> Songs { get; set; }
 		public IList<Song> Song { get; set; }
 		public ICollection<Bishopric> Bishopric { get; set; }
 
@@ -81,7 +83,50 @@ namespace SacramentMeetingPlanner.Pages.Planners
 			return Page();
 		}
 
-		public async Task<IActionResult> OnPostUpdateSongsAsync(int? id)
+        public async Task<IActionResult> OnPostUpdateSpeakersAsync(int? id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            var plannerToUpdate = await _context.Planner.FindAsync(id);
+
+            if (await TryUpdateModelAsync<Planner>(
+                plannerToUpdate,
+                "planner",
+                p => p.MeetingDate, p => p.BishopricId, p => p.OpenPrayer, p => p.ClosePrayer))
+            {
+                await _context.SaveChangesAsync();
+            
+                Speaker = await _context.Speakers.ToListAsync();
+                foreach (var sp in Speaker)
+                {
+                    if (sp.PlannerId == id)
+                    {
+                        return RedirectToPage("/Speakers/Edit", new { id = sp.SpeakerId });
+                    }
+                }
+                //take this out when i figure out how to have a add songs and a edit songs button???
+                return RedirectToPage("/Speakers/Create", new { id = plannerToUpdate.PlannerId });
+
+            }
+
+            Speaker = await _context.Speakers.ToListAsync();
+            foreach (var sp in Speaker)
+            {
+                if (sp.PlannerId == id)
+                {
+                    return RedirectToPage("/Speakers/Edit", new { id = sp.SpeakerId });
+                }
+            }
+            return Page();
+        }
+
+
+
+
+        public async Task<IActionResult> OnPostUpdateSongsAsync(int? id)
 		{
 			if (!ModelState.IsValid)
 			{
